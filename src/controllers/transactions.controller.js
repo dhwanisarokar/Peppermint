@@ -1,4 +1,5 @@
 const Transaction = require("../models/Transantion");
+const ApiError = require('../utils/ApiError');
 
 const getTransactions = async (req, res) => {
   try {
@@ -13,7 +14,8 @@ const getTransactions = async (req, res) => {
       .status(200)
       .json({ transactions, netBalance: totalIncome - totalExpenses });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    throw new ApiError(500, "Failed to fetch transaction");
+
   }
 };
 
@@ -22,7 +24,7 @@ const deleteTransaction = async (req, res) => {
     await Transaction.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: "Transaction deleted" });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    throw new ApiError(500, "Failed to delete transaction");
   }
 };
 
@@ -38,8 +40,7 @@ const createTransaction = async (req, res) => {
     // await transaction.save();
     res.status(201).json(transaction);
   } catch (err) {
-    console.log(err)
-    res.status(400).json({ error: err.message });
+    throw new ApiError(500, "Failed to create transaction");
   }
 };
 
