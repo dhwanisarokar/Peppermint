@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
+const ApiError = require('./utils/ApiError')
 const { errorHandler } = require("./middlewares/error");
 const transactionRoutes = require('./routes/transactions.routes');
 
