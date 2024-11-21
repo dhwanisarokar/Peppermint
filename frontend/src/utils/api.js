@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'https://peppermint-k3wv.onrender.com';
+const API_BASE = 'https://peppermint-k3wv.onrender.com/api/transactions';
 
 export const fetchTransactions = async () => {
     const response = await axios.get(API_BASE);
